@@ -18,5 +18,3 @@ def get_token(fp):
     with open(fp, "r") as f:
         token = f.read()
     return token
-
-def
