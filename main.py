@@ -5,17 +5,18 @@
 
 
 # Imports
-
+import os
 from client_funcs import *
+from disgit_funcs import *
+
 
 # main function
 def main():
     client = generate_client()
-
+    make_repos_folder()
     @client.event
     async def on_message(message):
-        if message.author != client.user:
-            await message.channel.send(message.content)
+        await disgit_message_handler(message, client)
 
     # run the client using your bots token
     client.run(get_token("token.txt"))
