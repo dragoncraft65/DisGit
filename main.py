@@ -5,10 +5,10 @@
 
 
 # Imports
-import discord
-import asyncio
+
 from client_funcs import *
 
+# main function
 def main():
     client = generate_client()
 
@@ -16,6 +16,10 @@ def main():
     async def on_message(message):
         if message.author != client.user:
             await message.channel.send(message.content)
+
+    # run the client using your bots token
+    client.run(get_token("token.txt"))
+
 
 if __name__ == "__main__":
     main()
