@@ -3,7 +3,7 @@ A discord bot that allows you to custom host a git style experience, has questio
 
 # Setup
 
-<p> Clone repository, add in a file with your bots token named token.txt, run the bot and it should work.  <br> Recommended to be put on a seperate drive or not an important computer due to the nonexistant security. </p> <br
+<p> Clone repository, add in a file with your bots token named token.txt, run the bot and it should work.  <br> Recommended to be put on a seperate drive or not an important computer due to the nonexistant security. </p>
 
 # Change Log
 
