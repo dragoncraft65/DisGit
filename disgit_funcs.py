@@ -12,6 +12,7 @@ def make_repos_folder():
         os.mkdir("DisGit_Repos")
         print("DisGit Repo folder has been created")
 
+
 async def create_new_repo(message):
     if message.content.split()[2] in next(os.walk("DisGit_Repos"))[1]:
         await message.channel.send("Repo Name already taken.")
@@ -60,12 +61,14 @@ def repo_list():
     return embed
 
 
-async def repo_edit(messsage):
-    if messsage.content.split()[2] == "-d":
-        await edit_repo_description(messsage)
+# function for editing repo properties
+async def repo_edit(message):
+    if message.content.split()[2] == "-d":
+        await edit_repo_description(message)
         return
 
 
+# Function that processes messages
 async def disgit_message_handler(message, client):
     channel = message.channel
     if message.author == client.user:
