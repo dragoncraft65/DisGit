@@ -4,3 +4,4 @@ A discord bot that allows you to custom host a git style experience, has questio
 
 Change Log
 v0.1- Just a really basic discord bot as of now
+v0.2- Can be used to make fake repos but can't actually store anything yet
