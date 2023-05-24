@@ -23,9 +23,12 @@ async def create_new_repo(message):
         await message.channel.send("Repo successfully created")
         return
 
+
 async def remove_repo(message):
     os.rmdir(f"DisGit_Repos/{message.content.split()[2]}")
     await message.channel.send("Repo removed")
+
+
 def disgit_help_function():
     embed = discord.Embed(title="DisGit Help")
     embed.add_field(name= "git -h", value = "You got to this menu so you must know how to use it", inline=True)
@@ -34,13 +37,35 @@ def disgit_help_function():
     embed.add_field(name="git -list", value="Lists all repositories", inline=True)
     return embed
 
+
+async def edit_repo_description(message):
+    repos = next(os.walk("DisGit_Repos"))[1]
+    if message.content.split()[2] not in repos:
+        await message.channel.send("Repo not found")
+        return
+    description = message.content.split()[2:]
+    author = message.author
+    new_description = f"{description} by -{author}"
+    with open(f"DisGit_Repos/{message.content.split()[2]}/description.txt", "w") as f:
+        f.write(new_description)
+    await message.channel.send("Description successfully updated")
+
+
 def repo_list():
     embed = discord.Embed(title="Repository LIst")
     for folder in next(os.walk("DisGit_Repos"))[1]:
         with open(f"DisGit_Repos/{folder}/description.txt", "r") as f:
             description = f.read()
-        embed.add_field(name= folder, value=description)
+        embed.add_field(name=folder, value=description)
     return embed
+
+
+async def repo_edit(messsage):
+    if messsage.content.split()[2] == "-d":
+        await edit_repo_description(messsage)
+        return
+
+
 async def disgit_message_handler(message, client):
     channel = message.channel
     if message.author == client.user:
@@ -52,12 +77,19 @@ async def disgit_message_handler(message, client):
             return
         elif message.content.split()[1] == "-h":
             await channel.send(embed=disgit_help_function())
+            return
         elif message.content.split()[1] == "-new":
-             await create_new_repo(message)
+            await create_new_repo(message)
+            return
         elif message.content.split()[1] == "-remove":
             await remove_repo(message)
+            return
         elif message.content.split()[1] == "-list":
-            await channel.send(embed= repo_list())
+            await channel.send(embed=repo_list())
+            return
+        elif message.content.split()[1] == "-edit":
+            await repo_edit(message)
+            return
 
     else:
         return
