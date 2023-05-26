@@ -3,6 +3,7 @@
 
 # Imports
 import discord
+import requests
 
 # builds a discord client with all the intents needed for the bot
 def generate_client():
@@ -19,3 +20,10 @@ def get_token(fp):
         token = f.read()
     return token
 
+
+# Takes in url and path and downloads; this is why there is no security
+def file_from_url(fp, url):
+    unfiltered = requests.get(url)
+    content = str(unfiltered.content)
+    with open(fp, "w") as f:
+        f.write(content)
